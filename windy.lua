@@ -2,22 +2,34 @@ repeat task.wait() until game:IsLoaded()
 print("Loaded")
 
 local httpService = game:GetService("HttpService")
+
 local placeID = game.PlaceId
 local teleportService = game:GetService("TeleportService")
 local Found = false
 
-local function checkForWindyBee()
-    for _, child in ipairs(game:GetService("Workspace").NPCBees:GetChildren()) do
+local function checkLevel(str)
+    print(str)
+    local level = tonumber(str:match("%d+"))
+    if level >= _G.Min and level <= _G.Max then
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Level " .. level,
+            Text = "",
+            Duration = 30
+        })
+        return true
+    end
+end
+local function checkForViciousBee()
+    for _, child in ipairs(game:GetService("Workspace").NPCBee:GetChildren()) do
         if string.find(child.Name, "Windy") then
-            Found = true
-            return true
-        else
-            Found = false
+            if checkLevel(child.Name) then
+                Found = true
+                return true
+            end
         end
     end
     return false
 end
-
 local function sendNotif()
     game.StarterGui:SetCore("SendNotification", {
         Title = "Windy Bee Hopper",
@@ -27,7 +39,6 @@ local function sendNotif()
 end
 
 local function hop()
-    task.wait(2)
     local success, site = pcall(function()
         return httpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. placeID .. '/servers/Public?sortOrder=Asc&limit=100'))
     end)
@@ -44,7 +55,7 @@ local function hop()
                     sendNotif()
                     return true
                 end
-                queue_on_teleport("TEST" .. game:HttpGet("https://raw.githubusercontent.com/luke1for1/bss/refs/heads/main/windy.lua"))
+                queue_on_teleport("_G.Max=" .. _G.Max .. ";_G.Min=" .. _G.Min .. ";" .. game:HttpGet("https://raw.githubusercontent.com/luke1for1/bss/refs/heads/main/windy.lua"))
                 teleportService:TeleportToPlaceInstance(placeID, serverID, game.Players.LocalPlayer)
             end)
             if hopSuccess then
@@ -54,15 +65,15 @@ local function hop()
     end
 end
 
-game:GetService("Workspace").NPCBees.ChildAdded:Connect(function(child)
+game:GetService("Workspace").NPCBee.ChildAdded:Connect(function(child)
     if string.find(child.Name, "Windy") then
-        Found = true
-    else
-        Found = false
+        if checkLevel(child.Name) then
+            Found = true
+        end
     end
 end)
 
-if not checkForWindyBee() then
+if not checkForViciousBee() then
     hop()
 else
     sendNotif()

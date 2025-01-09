@@ -1,4 +1,4 @@
-
+repeat task.wait() until game:IsLoaded()
 print("Loaded")
 
 local httpService = game:GetService("HttpService")
@@ -43,7 +43,7 @@ local function hop()
                     sendNotif()
                     return true
                 end
-                queue_on_teleport("TEST" .. game:HttpGet("https://raw.githubusercontent.com/luke1for1/zenith/refs/heads/main/whop.lua"))
+                queue_on_teleport("TEST" .. game:HttpGet("https://raw.githubusercontent.com/luke1for1/bss/refs/heads/main/windy.lua"))
                 teleportService:TeleportToPlaceInstance(placeID, serverID, game.Players.LocalPlayer)
             end)
             if hopSuccess then

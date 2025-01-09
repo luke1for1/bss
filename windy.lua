@@ -11,6 +11,8 @@ local function checkForWindyBee()
         if string.find(child.Name, "Windy") then
             Found = true
             return true
+        else
+            Found = false
         end
     end
     return false
@@ -25,7 +27,6 @@ local function sendNotif()
 end
 
 local function hop()
-task.wait(3)
     local success, site = pcall(function()
         return httpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. placeID .. '/servers/Public?sortOrder=Asc&limit=100'))
     end)
@@ -42,7 +43,7 @@ task.wait(3)
                     sendNotif()
                     return true
                 end
-                queue_on_teleport(game:HttpGet('https://raw.githubusercontent.com/luke1for1/bss/refs/heads/main/windy.lua'))
+                queue_on_teleport("TEST" .. game:HttpGet("https://raw.githubusercontent.com/luke1for1/zenith/refs/heads/main/whop.lua"))
                 teleportService:TeleportToPlaceInstance(placeID, serverID, game.Players.LocalPlayer)
             end)
             if hopSuccess then
@@ -55,6 +56,8 @@ end
 game:GetService("Workspace").NPCBees.ChildAdded:Connect(function(child)
     if string.find(child.Name, "Windy") then
         Found = true
+    else
+        Found = false
     end
 end)
 

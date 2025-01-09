@@ -51,7 +51,7 @@ local function hop()
                 if Found then return true end
                 notify("Windy Bee Not Found", "No Windy Bee on this server. Hopping to the next...")
 				wait(1)
-		queue_on_teleport(game:HttpGet("https://raw.githubusercontent.com/luke1for1/bss/refs/heads/main/windy.lua"))()
+		queue_on_teleport(game:HttpGet("https://raw.githubusercontent.com/luke1for1/bss/refs/heads/main/hopper.lua"))()
                 teleportService:TeleportToPlaceInstance(placeID, serverID, game.Players.LocalPlayer)
             end)
             

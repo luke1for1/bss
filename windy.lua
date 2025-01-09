@@ -41,7 +41,7 @@ local function hop()
                     sendNotif()
                     return true
                 end
-                syn.queue_on_teleport("game:HttpGet('https://raw.githubusercontent.com/luke1for1/bss/refs/heads/main/windy.lua')()")
+                syn.queue_on_teleport(game:HttpGet('https://raw.githubusercontent.com/luke1for1/bss/refs/heads/main/windy.lua'))
                 teleportService:TeleportToPlaceInstance(placeID, serverID, game.Players.LocalPlayer)
             end)
             if hopSuccess then

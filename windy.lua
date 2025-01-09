@@ -1,5 +1,6 @@
 repeat task.wait() until game:IsLoaded()
 print("Loaded")
+task.wait(3)
 
 local httpService = game:GetService("HttpService")
 local placeID = game.PlaceId

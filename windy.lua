@@ -1,6 +1,4 @@
 repeat task.wait() until game:IsLoaded()
-print("Windy Bee Hopper Loaded!")
-
 local httpService = game:GetService("HttpService")
 local placeID = game.PlaceId
 local teleportService = game:GetService("TeleportService")

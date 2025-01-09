@@ -1,6 +1,5 @@
 repeat task.wait() until game:IsLoaded()
 print("Loaded")
-task.wait(3)
 
 local httpService = game:GetService("HttpService")
 local placeID = game.PlaceId
@@ -26,6 +25,7 @@ local function sendNotif()
 end
 
 local function hop()
+task.wait(3)
     local success, site = pcall(function()
         return httpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. placeID .. '/servers/Public?sortOrder=Asc&limit=100'))
     end)

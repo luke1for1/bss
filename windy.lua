@@ -27,6 +27,7 @@ local function sendNotif()
 end
 
 local function hop()
+    task.wait(2)
     local success, site = pcall(function()
         return httpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. placeID .. '/servers/Public?sortOrder=Asc&limit=100'))
     end)
